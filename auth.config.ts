@@ -1,12 +1,8 @@
-import { PrismaAdapter } from "@auth/prisma-adapter";
 import type { NextAuthConfig } from "next-auth";
-import github from "next-auth/providers/github";
-import { prisma } from "./prisma/prisma";
+import { NextResponse } from "next/server";
 
 export const authConfig = {
-	adapter: PrismaAdapter(prisma),
-
-	providers: [github],
+	providers: [],
 	pages: {
 		signIn: "/login",
 	},
@@ -14,11 +10,10 @@ export const authConfig = {
 		authorized({ auth, request: { nextUrl } }) {
 			const isLoggedIn = !!auth?.user;
 			const isOnHome = nextUrl.pathname.startsWith("/");
-			if (isOnHome) {
-				if (isLoggedIn) return true;
-				return false; // Redirect unauthenticated users to login page
-			} else if (isLoggedIn) {
-				return Response.redirect(new URL("/", nextUrl));
+			if (isOnHome && !isLoggedIn) {
+				return false;
+			} else if (nextUrl.pathname === "/login" && isLoggedIn) {
+				return NextResponse.redirect(new URL("/", nextUrl));
 			}
 			return true;
 		},
