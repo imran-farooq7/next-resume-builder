@@ -1,24 +1,25 @@
+"use client";
 import Basic from "@/components/Basic";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useFormState } from "@/Context/FormContext";
 
 const ProfilePage = () => {
+	let content = null;
+	const { step } = useFormState();
+	if (step === 0) {
+		content = <Basic />;
+	}
 	return (
-		<div className="mt-6">
+		<div className="mt-10">
 			<h1 className=" text-3xl font-bold text-blue-800">Profile</h1>
-			<Tabs defaultValue="basic" className="w-full mt-5">
-				<TabsList>
-					<TabsTrigger value="basic">Basic</TabsTrigger>
-					<TabsTrigger value="education">Education</TabsTrigger>
-					<TabsTrigger value="experience">Experience</TabsTrigger>
-					<TabsTrigger value="skills">Skills</TabsTrigger>
-				</TabsList>
-				<TabsContent className="mt-6" value="basic">
-					<Basic />
-				</TabsContent>
-				<TabsContent value="education">Change your password here.</TabsContent>
-				<TabsContent value="experience">Change your password here.</TabsContent>
-				<TabsContent value="skills">Change your password here.</TabsContent>
-			</Tabs>
+			<div className="flex gap-20 mt-8">
+				<p className={`font-bold text-2xl ${step === 0 && "text-blue-700"}`}>
+					Basic
+				</p>
+				<p className="font-bold text-2xl">Edcation</p>
+				<p className="font-bold text-2xl">Experience</p>
+				<p className="font-bold text-2xl">Skills</p>
+			</div>
+			<div className="mt-10">{content}</div>
 		</div>
 	);
 };

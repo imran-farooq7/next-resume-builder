@@ -1,36 +1,27 @@
-interface Props {
-	htmlForm: string;
-	labelText: string;
-	type: string;
-	name: string;
-	id: string;
-	placeholder: string;
+import { forwardRef, HTMLProps, Ref } from "react";
+
+interface Props extends HTMLProps<HTMLInputElement> {
+	label: string;
 }
-export default function Input({
-	htmlForm,
-	id,
-	labelText,
-	name,
-	placeholder,
-	type,
-}: Props) {
+
+const Input = forwardRef((props: Props, ref: Ref<HTMLInputElement>) => {
 	return (
 		<div>
 			<label
-				htmlFor={htmlForm}
+				htmlFor={props.id}
 				className="block text-sm font-medium leading-6 text-gray-900"
 			>
-				{labelText}
+				{props.label}
 			</label>
 			<div className="mt-2">
 				<input
-					type={type}
-					name={name}
-					id={id}
 					className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 placeholder:pl-2"
-					placeholder={placeholder}
+					ref={ref}
+					{...props}
 				/>
 			</div>
 		</div>
 	);
-}
+});
+
+export default Input;
