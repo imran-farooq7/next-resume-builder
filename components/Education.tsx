@@ -5,7 +5,7 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 interface FormValues {
 	educations: {
 		qualification: string;
-		year: number;
+		year: string;
 	}[];
 }
 
@@ -28,10 +28,10 @@ const Education = () => {
 			<div>
 				<button
 					type="button"
-					onClick={() => append({ qualification: "", year: 0 })}
+					onClick={() => append({ qualification: "", year: "" })}
 					className="bg-emerald-400 text-white py-3 px-10 rounded-lg mt-4 hover:scale-105 transition-all ease-in-out"
 				>
-					Add Row
+					Add education
 				</button>
 			</div>
 			{fields.map((field, i) => {

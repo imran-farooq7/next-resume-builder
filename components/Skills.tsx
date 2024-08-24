@@ -30,7 +30,7 @@ const Skills = () => {
 					onClick={() => append({ technology: "", rating: "" })}
 					className="bg-emerald-400 text-white py-3 px-10 rounded-lg mt-4 hover:scale-105 transition-all ease-in-out"
 				>
-					Add Row
+					Add skill
 				</button>
 			</div>
 			{fields.map((field, i) => {

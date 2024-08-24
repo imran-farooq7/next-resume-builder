@@ -1,6 +1,7 @@
 "use client";
 import Basic from "@/components/Basic";
 import Education from "@/components/Education";
+import Experience from "@/components/Experience";
 import Skills from "@/components/Skills";
 import { useFormState } from "@/Context/FormContext";
 
@@ -16,6 +17,9 @@ const ProfilePage = () => {
 	}
 	if (context?.step === 2) {
 		content = <Skills />;
+	}
+	if (context?.step === 3) {
+		content = <Experience />;
 	}
 	return (
 		<div className="mt-10">
