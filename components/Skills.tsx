@@ -3,23 +3,22 @@ import { useFieldArray, useForm } from "react-hook-form";
 import Input from "./Input";
 import { TrashIcon } from "@heroicons/react/24/outline";
 interface FormValues {
-	educations: {
-		qualification: string;
-		year: number;
+	skills: {
+		technology: string;
+		rating: string;
 	}[];
 }
 
-const Education = () => {
+const Skills = () => {
 	const context = useFormState();
 	const { register, handleSubmit, control } = useForm<FormValues>({
 		defaultValues: context?.formData,
 	});
 	const { fields, append, remove } = useFieldArray({
-		name: "educations",
+		name: "skills",
 		control,
 	});
 	const handleFormSubmit = (data: FormValues) => {
-		console.log(data);
 		context?.handleFormData(data);
 		context?.handleNextStep();
 	};
@@ -28,7 +27,7 @@ const Education = () => {
 			<div>
 				<button
 					type="button"
-					onClick={() => append({ qualification: "", year: 0 })}
+					onClick={() => append({ technology: "", rating: "" })}
 					className="bg-emerald-400 text-white py-3 px-10 rounded-lg mt-4 hover:scale-105 transition-all ease-in-out"
 				>
 					Add Row
@@ -41,16 +40,12 @@ const Education = () => {
 						key={field.id}
 					>
 						<Input
-							label="Qualification"
-							{...register(`educations.${i}.qualification`, {
-								required: true,
-							})}
+							label="Technology"
+							{...register(`skills.${i}.technology`, { required: true })}
 						/>
 						<Input
-							label="Year of passing"
-							{...register(`educations.${i}.year`, {
-								required: true,
-							})}
+							label="Rating"
+							{...register(`skills.${i}.rating`, { required: true })}
 							type="number"
 						/>
 
@@ -79,4 +74,4 @@ const Education = () => {
 	);
 };
 
-export default Education;
+export default Skills;
