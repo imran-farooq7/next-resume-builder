@@ -1,4 +1,3 @@
-"use client";
 import { useFormState } from "@/Context/FormContext";
 import { useForm } from "react-hook-form";
 import Input from "./Input";
@@ -10,12 +9,13 @@ interface FormValues {
 }
 
 const Basic = () => {
-	const { formData, handleFormData } = useFormState();
+	const context = useFormState();
 	const { register, handleSubmit, control } = useForm<FormValues>({
-		defaultValues: formData,
+		defaultValues: context?.formData,
 	});
 	const handleFormSubmit = (data: FormValues) => {
-		handleFormData(data);
+		context?.handleFormData(data);
+		context?.handleNextStep();
 	};
 
 	return (
@@ -50,7 +50,7 @@ const Basic = () => {
 						{...register("career")}
 					/>
 				</div>
-				<button className="bg-blue-700 text-white py-3 px-10 rounded-lg mt-4 hover:scale-105 transition-all ease-in-out">
+				<button className="bg-emerald-400 text-white py-3 px-10 rounded-lg mt-4 hover:scale-105 transition-all ease-in-out">
 					Next
 				</button>
 			</div>

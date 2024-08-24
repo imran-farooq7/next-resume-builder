@@ -6,19 +6,13 @@ interface FormContext {
 	handleFormData: (data: any) => void;
 	formData: {};
 }
-const formContext = createContext<FormContext>({
-	step: 0,
-	handleNextStep: () => {},
-	handleFormData: (data: any) => {},
-	handlePreviousStep: () => {},
-	formData: {},
-});
+const formContext = createContext<FormContext | null>(null);
 
 const FormProvider = ({ children }: { children: React.ReactNode }) => {
 	const [step, setStep] = useState(0);
 	const [formData, setFormData] = useState({});
 	const handleNextStep = () => {
-		if (step > 0) {
+		if (step >= 0) {
 			setStep((prev) => prev + 1);
 		} else {
 			return;
@@ -35,7 +29,7 @@ const FormProvider = ({ children }: { children: React.ReactNode }) => {
 		setFormData((prev) => {
 			return {
 				...prev,
-				data,
+				...data,
 			};
 		});
 	};
@@ -54,6 +48,7 @@ const FormProvider = ({ children }: { children: React.ReactNode }) => {
 		</formContext.Provider>
 	);
 };
+
 export const useFormState = () => {
 	return useContext(formContext);
 };
