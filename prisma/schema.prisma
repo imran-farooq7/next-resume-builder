@@ -21,6 +21,14 @@ model User {
   role          String?
 }
 
+model Template {
+  id        String  @id @default(cuid())
+  name      String
+  thumbnail String
+  html      String
+  isPaid    Boolean
+}
+
 model Account {
   userId            String
   type              String
