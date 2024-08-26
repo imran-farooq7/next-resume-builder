@@ -2,14 +2,19 @@
 import Container from "@/components/Container";
 import Navbar from "@/components/Navbar";
 import FormProvider from "@/Context/FormContext";
+import { SessionProvider } from "next-auth/react";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+export default function ProfileLayout({
+	children,
+}: {
+	children: React.ReactNode;
+}) {
 	return (
-		<FormProvider>
-			<Navbar />
-			<Container>{children}</Container>
-		</FormProvider>
+		<SessionProvider>
+			<FormProvider>
+				<Navbar />
+				<Container>{children}</Container>
+			</FormProvider>
+		</SessionProvider>
 	);
-};
-
-export default Layout;
+}

@@ -18,6 +18,7 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   resumeProfile Json      @default("{}")
+  role          String?
 }
 
 model Account {
