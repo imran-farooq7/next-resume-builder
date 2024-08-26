@@ -17,6 +17,7 @@ model User {
   sessions      Session[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  resumeProfile Json      @default("{}")
 }
 
 model Account {

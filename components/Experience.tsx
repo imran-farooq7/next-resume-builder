@@ -2,6 +2,10 @@ import { useFormState } from "@/Context/FormContext";
 import { useFieldArray, useForm } from "react-hook-form";
 import Input from "./Input";
 import { TrashIcon } from "@heroicons/react/24/outline";
+import { updateUser } from "@/lib/actions";
+import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
+import { useState } from "react";
 interface FormValues {
 	experiences: {
 		company: string;
@@ -13,6 +17,7 @@ interface FormValues {
 }
 
 const Experience = () => {
+	const [loading, setLoading] = useState(false);
 	const context = useFormState();
 	const { register, handleSubmit, control } = useForm<FormValues>({
 		defaultValues: context?.formData,
@@ -21,9 +26,20 @@ const Experience = () => {
 		name: "experiences",
 		control,
 	});
-	const handleFormSubmit = (data: FormValues) => {
+	const handleFormSubmit = async (data: FormValues) => {
 		context?.handleFormData(data);
-		// context?.handleNextStep();
+		try {
+			setLoading(true);
+			const res = await updateUser(context?.formData);
+			if (res?.status === "success") {
+				toast.success(res.message);
+			} else {
+				toast.error(res.message);
+			}
+		} catch (error) {
+		} finally {
+			setLoading(false);
+		}
 	};
 	return (
 		<form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -104,9 +120,14 @@ const Experience = () => {
 				</button>
 				<button
 					type="submit"
+					disabled={loading}
 					className="bg-emerald-400 text-white py-3 px-10 rounded-lg mt-4 hover:scale-105 transition-all ease-in-out"
 				>
-					Submit
+					{loading ? (
+						<span className="animate-pulse">Submitting...</span>
+					) : (
+						"Submit"
+					)}
 				</button>
 			</div>
 		</form>
