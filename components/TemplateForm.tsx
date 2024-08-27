@@ -3,14 +3,44 @@ import { FieldValues, useForm } from "react-hook-form";
 import Input from "./Input";
 import { useState } from "react";
 import CodeMirror from "@uiw/react-codemirror";
+import { uploadThumbnail } from "@/supabase/client";
+import { createTemplate } from "@/lib/actions";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const TemplateForm = () => {
 	const { register, handleSubmit } = useForm();
+	const [loading, setLoading] = useState(false);
 	const [html, setHtml] = useState("");
-	const onSubmit = (data: FieldValues) => {
-		const template = { ...data, html };
-		console.log(template);
+	const router = useRouter();
+
+	const onSubmit = async (data: FieldValues) => {
+		try {
+			setLoading(true);
+			const url = await uploadThumbnail(data.thumbnail[0]);
+			const tempData = {
+				name: data.name,
+				thumbnail: url,
+				html,
+				isPaid: data.isPaid,
+			};
+			const template = await createTemplate(tempData);
+			if (
+				template?.status === "success" &&
+				url !== "The resource already exists"
+			) {
+				toast.success("Template created successfully");
+				router.push("/admin/templates");
+				router.refresh();
+			} else {
+				toast.error("Template creation failed");
+			}
+		} catch (error) {
+		} finally {
+			setLoading(false);
+		}
 	};
+
 	return (
 		<form className="flex flex-col gap-8" onSubmit={handleSubmit(onSubmit)}>
 			<Input
@@ -41,11 +71,11 @@ const TemplateForm = () => {
 					<span className="text-gray-600 font-medium">Upload Thumbnail</span>
 				</label>
 				<Input
-					{...register("thumbnail")}
 					label=""
 					id="upload"
 					type="file"
 					className="hidden"
+					{...register("thumbnail")}
 				/>
 			</div>
 			<div>
@@ -62,7 +92,7 @@ const TemplateForm = () => {
 				/>
 			</div>
 			<button className="bg-emerald-400 self-end text-white py-3 px-10 rounded-lg mt-4 hover:scale-105 transition-all ease-in-out">
-				Save
+				{loading ? <span className="animate-pulse">Saving...</span> : "Save"}
 			</button>
 		</form>
 	);

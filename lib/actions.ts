@@ -31,7 +31,7 @@ export const updateUser = async (resumeProfile: any) => {
 		};
 	}
 };
-export const createTemplate = async (template: Template) => {
+export const createTemplate = async (template: any) => {
 	try {
 		const createdTemplate = await prisma.template.create({
 			data: {
