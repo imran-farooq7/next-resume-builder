@@ -2,6 +2,7 @@ import { forwardRef, HTMLProps, Ref } from "react";
 
 interface Props extends HTMLProps<HTMLInputElement> {
 	label: string;
+	checkBox?: boolean;
 }
 
 const Input = forwardRef((props: Props, ref: Ref<HTMLInputElement>) => {
@@ -9,7 +10,9 @@ const Input = forwardRef((props: Props, ref: Ref<HTMLInputElement>) => {
 		<div>
 			<label
 				htmlFor={props.id}
-				className="block text-sm font-medium leading-6 text-gray-900"
+				className={`${
+					props.checkBox ? "inline" : "block"
+				} text-sm font-medium leading-6 text-gray-900`}
 			>
 				{props.label}
 			</label>
