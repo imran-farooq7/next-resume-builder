@@ -1,14 +1,18 @@
 "use client";
 import { FieldValues, useForm } from "react-hook-form";
 import Input from "./Input";
+import { useState } from "react";
+import CodeMirror from "@uiw/react-codemirror";
 
 const TemplateForm = () => {
 	const { register, handleSubmit } = useForm();
+	const [html, setHtml] = useState("");
 	const onSubmit = (data: FieldValues) => {
-		console.log(data);
+		const template = { ...data, html };
+		console.log(template);
 	};
 	return (
-		<form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+		<form className="flex flex-col gap-8" onSubmit={handleSubmit(onSubmit)}>
 			<Input
 				label="Name"
 				{...register("name", {
@@ -44,6 +48,10 @@ const TemplateForm = () => {
 					className="hidden"
 				/>
 			</div>
+			<div>
+				<label htmlFor="html">HTML</label>
+				<CodeMirror id="HTML" value={html} onChange={(val) => setHtml(val)} />
+			</div>
 			<div className="flex gap-4 items-center">
 				<label htmlFor="checkbox">Is it paid?</label>
 				<input
@@ -53,6 +61,9 @@ const TemplateForm = () => {
 					className="h-4 w-4 rounded border-gray-300 text-emerald-400 focus:ring-emerald-400"
 				/>
 			</div>
+			<button className="bg-emerald-400 self-end text-white py-3 px-10 rounded-lg mt-4 hover:scale-105 transition-all ease-in-out">
+				Save
+			</button>
 		</form>
 	);
 };
