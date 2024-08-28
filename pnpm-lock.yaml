@@ -66,6 +66,9 @@ importers:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.10)
     devDependencies:
+      '@types/mustache':
+        specifier: ^4.2.5
+        version: 4.2.5
       '@types/node':
         specifier: ^20
         version: 20.16.1
@@ -520,6 +523,9 @@ packages:
 
   '@types/cookie@0.6.0':
     resolution: {integrity: sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==}
+
+  '@types/mustache@4.2.5':
+    resolution: {integrity: sha512-PLwiVvTBg59tGFL/8VpcGvqOu3L4OuveNvPi0EYbWchRdEVP++yRUXJPFl+CApKEq13017/4Nf7aQ5lTtHUNsA==}
 
   '@types/node@20.16.1':
     resolution: {integrity: sha512-zJDo7wEadFtSyNz5QITDfRcrhqDvQI1xQNQ0VoizPjM/dVAODqqIUWbJPkvsxmTI0MYRGRikcdjMPhOssnPejQ==}
@@ -1588,6 +1594,8 @@ snapshots:
   '@tanstack/virtual-core@3.10.1': {}
 
   '@types/cookie@0.6.0': {}
+
+  '@types/mustache@4.2.5': {}
 
   '@types/node@20.16.1':
     dependencies:

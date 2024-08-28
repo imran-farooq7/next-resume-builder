@@ -10,7 +10,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		Github({
 			profile(profile) {
 				return {
-					role: profile.role ?? "admin",
+					role: profile.role ?? "user",
 					id: String(profile.id),
 					email: profile.email,
 					image: profile.avatar_url,

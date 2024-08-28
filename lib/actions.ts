@@ -85,3 +85,18 @@ export const deleteTemplate = async (id: string) => {
 		};
 	}
 };
+export const getTemplateById = async (id: string) => {
+	try {
+		const template = await prisma.template.findUnique({
+			where: {
+				id: id,
+			},
+		});
+		return template;
+	} catch (error) {
+		return {
+			status: "error",
+			message: "something went wrong",
+		};
+	}
+};
