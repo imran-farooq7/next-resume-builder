@@ -23,11 +23,12 @@ model User {
 }
 
 model Template {
-  id        String  @id @default(cuid())
+  id        String   @id @default(cuid())
   name      String
   thumbnail String
   html      String
   isPaid    Boolean
+  createdAt DateTime @default(now())
 }
 
 model Account {
