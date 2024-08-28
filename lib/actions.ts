@@ -2,6 +2,7 @@
 import { auth } from "@/auth";
 import { prisma } from "@/prisma/prisma";
 import { Template } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export const updateUser = async (resumeProfile: any) => {
@@ -72,6 +73,7 @@ export const deleteTemplate = async (id: string) => {
 				id: id,
 			},
 		});
+		revalidatePath("/admin/templates");
 		return {
 			status: "success",
 			message: "Template deleted successfully",

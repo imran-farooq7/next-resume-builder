@@ -1,10 +1,23 @@
+"use client";
+import { deleteTemplate } from "@/lib/actions";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { Template } from "@prisma/client";
+import toast from "react-hot-toast";
 
 interface Props {
 	templates: Template[];
 }
 const TemplatesTable = ({ templates }: Props) => {
+	const handleDeletTemplate = async (id: string) => {
+		try {
+			const res = await deleteTemplate(id);
+			if (res.status === "success") {
+				toast.success(res.message);
+			} else {
+				toast.error(res.message);
+			}
+		} catch (error) {}
+	};
 	return (
 		<table className="min-w-full divide-y divide-gray-300">
 			<thead className="bg-gray-50">
@@ -41,7 +54,10 @@ const TemplatesTable = ({ templates }: Props) => {
 						</td>
 
 						<td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-							<TrashIcon className="text-red-600 w-8 cursor-pointer" />
+							<TrashIcon
+								className="text-red-600 w-8 cursor-pointer"
+								onClick={() => handleDeletTemplate(template.id)}
+							/>
 						</td>
 					</tr>
 				))}
