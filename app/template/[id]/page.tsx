@@ -23,26 +23,10 @@ const TemplatePreview = async ({ params: { id } }: Props) => {
 		},
 	});
 	return (
-		<div className="flex flex-col">
-			<div className="flex gap-4 justify-center mt-5">
-				<Link
-					href={"/"}
-					className="bg-emerald-400 text-white py-3 px-10 rounded-lg mt-4 hover:scale-105 transition-all ease-in-out"
-				>
-					Back to Templates
-				</Link>
-				<button
-					type="submit"
-					className="bg-emerald-400 text-white py-3 px-10 rounded-lg mt-4 hover:scale-105 transition-all ease-in-out"
-				>
-					Print
-				</button>
-			</div>
-			<Resume
-				template={template as Template}
-				userProfile={userProfile?.resumeProfile!}
-			/>
-		</div>
+		<Resume
+			template={template as Template}
+			userProfile={userProfile?.resumeProfile!}
+		/>
 	);
 };
 

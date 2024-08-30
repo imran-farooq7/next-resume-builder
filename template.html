@@ -5,216 +5,324 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
 		<style>
-			.container {
+			/********** /* Grille - 960.gs **********/
+			body {
+				color: #333;
+				font-size: 14px;
+				line-height: 21px;
+			}
+			.container_16 {
+				margin: 0 auto;
+				background: #f5f5f5;
+				height: 100%;
+			}
+			.resume-container {
 				width: 800px;
-				background: #fff;
-				margin: 0px auto 0px;
-				box-shadow: 1px 1px 2px #dad7d7;
-				border-radius: 3px;
-				padding: 40px;
-				margin-top: 25px;
+				margin: auto;
 			}
-
-			.header {
-				margin-bottom: 30px;
-
-				.full-name {
-					font-size: 40px;
-					text-transform: uppercase;
-					margin-bottom: 5px;
-				}
-
-				.first-name {
-					font-weight: 700;
-				}
-
-				.last-name {
-					font-weight: 300;
-				}
-
-				.contact-info {
-					margin-bottom: 20px;
-				}
-
-				.email,
-				.phone {
-					color: #999;
-					font-weight: 300;
-				}
-
-				.separator {
-					height: 10px;
-					display: inline-block;
-					border-left: 2px solid #999;
-					margin: 0px 10px;
-				}
-
-				.position {
-					font-weight: bold;
-					display: inline-block;
-					margin-right: 10px;
-					text-decoration: underline;
-				}
+			.grid_6,
+			.grid_8,
+			.grid_10,
+			.grid_16 {
+				display: inline;
+				float: left;
+				position: relative;
+				margin-left: 1%;
+				margin-right: 1%;
 			}
-
-			.details {
-				line-height: 20px;
-
-				.section {
-					margin-bottom: 40px;
-				}
-
-				.section:last-of-type {
-					margin-bottom: 0px;
-				}
-
-				.section__title {
-					letter-spacing: 2px;
-					color: #54afe4;
-					font-weight: bold;
-					margin-bottom: 10px;
-					text-transform: uppercase;
-				}
-
-				.section__list-item {
-					margin-bottom: 40px;
-				}
-
-				.section__list-item:last-of-type {
-					margin-bottom: 0;
-				}
-
-				.left,
-				.right {
-					vertical-align: top;
-					display: inline-block;
-				}
-
-				.left {
-					width: 60%;
-				}
-
-				.right {
-					text-align: right;
-					width: 39%;
-				}
-
-				.name {
-					font-weight: bold;
-				}
-
-				a {
-					text-decoration: none;
-					color: #000;
-					font-style: italic;
-				}
-
-				a:hover {
-					text-decoration: underline;
-					color: #000;
-				}
-
-				.skills__item {
-					margin-bottom: 10px;
-				}
-
-				.skills__item .right {
-					input {
-						display: none;
-					}
-
-					label {
-						display: inline-block;
-						width: 20px;
-						height: 20px;
-						background: #c3def3;
-						border-radius: 20px;
-						margin-right: 3px;
-					}
-
-					input:checked + label {
-						background: #79a9ce;
-					}
-				}
+			.container_16 .grid_6 {
+				width: 35.5%;
 			}
+			.container_16 .grid_8 {
+				width: 48%;
+			}
+			.container_16 .grid_10 {
+				width: 60.5%;
+			}
+			.container_16 .grid_16 {
+				width: 98%;
+			}
+			.clearfix:after {
+				clear: both;
+				content: " ";
+				display: block;
+				font-size: 0;
+				line-height: 0;
+				visibility: hidden;
+				width: 0;
+				height: 0;
+			}
+			.clearfix {
+				display: inline-block;
+			}
+			* html .clearfix {
+				height: 1%;
+			}
+			.clearfix {
+				display: block;
+			} /********** /* Header **********/
+			header[role="banner"] {
+				background: #33a4c9;
+				border-bottom: 4px solid #33a4c9;
+				padding: 1.5rem;
+				margin: 0 auto;
+				overflow: hidden;
+			}
+			header figure {
+				float: right;
+				height: 156px;
+				width: 156px;
+			}
+			header figure img {
+				border-radius: 75px;
+				height: 150px;
+				position: relative;
+				width: 150px;
+			}
+			header hgroup {
+				float: left;
+				padding: 42px 0;
+			}
+			header hgroup h1 {
+				color: white;
+				font-weight: bold;
+				font-size: 1.5rem;
+			}
+			header hgroup h2 {
+				color: white;
+				font-style: italic;
+				text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+			} /*************** /* Corps - Main ***************/
+			section[role="main"] {
+				padding: 1rem 1.5rem;
+				overflow: hidden;
+			}
+			section[role="main"] > div {
+				margin-top: 2rem;
+			}
+			section[role="main"] h3 {
+				margin-bottom: 1.5rem;
+				border-bottom: 1px solid #e1e1e1;
+				padding: 0 0 20px 60px;
+				margin-top: 0px;
+				position: relative;
+			}
+			section[role="main"] h3:after,
+			h3:before {
+				content: " ";
+				display: block;
+				height: 50px;
+				left: 0;
+				position: absolute;
+				top: -15px;
+				width: 50px;
+			}
+			section[role="main"] h3:before {
+				background-color: #33a4c9;
+				border-radius: 25px;
+			} /*************** 		/* Pictos titres 		***************/
+			section[role="main"] h3:after {
+				background: url("../img/pictos-titre.png") no-repeat 11px 10px;
+			}
+			section[role="main"] .competences h3:after {
+				background-position: 11px -34px;
+			}
+			section[role="main"] .experiences h3:after {
+				background-position: 11px -86px;
+			}
+			section[role="main"] .formations h3:after {
+				background-position: 10px -139px;
+			}
+			section[role="main"] .loisirs h3:after {
+				background-position: 10px -250px;
+			}
+			section[role="main"] .contact h3:after {
+				background-position: 11px -194px;
+			}
+			.experiences ul,
+			.formations ul {
+				margin-left: 60px;
+			}
+			section[role="main"] h4 {
+				margin-bottom: 0px;
+			}
+			section[role="main"] h4 strong {
+				color: #33a4c9;
+				font-weight: bold;
+			}
+			.experiences li,
+			.formations li {
+				margin: 1rem 0;
+			}
+			.experiences li:last-child,
+			.formations li:last-child {
+				margin-bottom: 21px;
+			}
+			.formations li p {
+				margin-left: 30px;
+			} /********************************************** 	/* Affichage des compétences sous forme de tags 	**********************************************/
+			.competences .tags li {
+				background-color: #33a4c9;
+				border: 1px solid #1b91b7;
+				border-radius: 15px;
+				color: #fff;
+				display: inline-block;
+				line-height: 13px;
+				margin: 0 7px 17px 0;
+				padding: 5px 10px;
+			} /************************************************ 	/* Affichage des compétences sous forme de barres 	*************************************************/
+			.competences .barres li {
+				margin-bottom: 21px;
+				position: relative;
+			}
+			.competences .barres li:after {
+				background: #e1e1e1;
+				bottom: -4px;
+				content: " ";
+				display: block;
+				height: 5px;
+				position: absolute;
+				width: 100%;
+			}
+			.competences .barres li span {
+				background: #33a4c9;
+				bottom: -4px;
+				content: " ";
+				display: block;
+				height: 5px;
+				left: 0;
+				position: absolute;
+				width: inherit;
+				z-index: 1;
+			} /*********** 	/* Pictos 	***********/
+			.lieu,
+			.phone,
+			.mail,
+			.site,
+			.form,
+			.twitter,
+			.facebook,
+			.dribbble,
+			.skype {
+				background: url("../img/pictos-gris.png") no-repeat;
+				padding-left: 25px;
+				margin: 0 10px 1px 10px;
+			}
+			.lieu {
+				background-position: 0 -2px;
+				color: #999;
+			}
+			.dates {
+				background-position: 0 -22px;
+				font-weight: 500;
+			}
+			.phone {
+				background-position: 0 -40px;
+			}
+			.mail {
+				background-position: 0 -58px;
+			}
+			.site {
+				background-position: 0 -80px;
+			}
+			.form {
+				background-position: 0 -100px;
+			}
+			.twitter {
+				background-position: 0 -122px;
+			}
+			.facebook {
+				background-position: 0 -140px;
+			}
+			.dribbble {
+				background-position: 0 -160px;
+			}
+			.skype {
+				background-position: 0 -180px;
+			}
+			/* .resume-body {
+				display: flex;
+				justify-content: center;
+			} */
 		</style>
 	</head>
-	<body>
-		<div class="container">
-			<div class="header">
-				<div class="full-name">
-					<span class="first-name">{{name}}</span>
+	<body class="resume-body">
+		<div class="resume-container">
+			<!-- Header -->
+			<header role="banner">
+				<div class="container_16">
+					<hgroup>
+						<h1>{{name}}</h1>
+						<h2>Frontend developer</h2>
+						<h2>Email: {{email}}</h2>
+						<h2>Phone: {{phone}}</h2>
+					</hgroup>
+					<figure>
+						<img
+							alt="Sheldon COOPER"
+							src="https://avatars.githubusercontent.com/u/70173754?v=4"
+						/>
+					</figure>
 				</div>
-				<div class="contact-info">
-					<span class="email">Email: </span>
-					<span class="email-val">{{email}}</span>
-					<span class="separator"></span>
-					<span class="phone">Phone: </span>
-					<span class="phone-val">{{phone}}</span>
+			</header>
+			<!-- Corps -->
+			<section role="main" class="container_16 clearfix">
+				<div class="grid_16">
+					<!-- A propos -->
+					<div class="grid_8 apropos">
+						<h3>About</h3>
+						<p>{{career}}</p>
+					</div>
+					<div class="grid_8 competences">
+						<h3>Skills</h3>
+						<ul class="barres">
+							{{#skills}}
+							<li data-skills="80">
+								{{technology}}<span style="width: 80%"></span>
+							</li>
+							{{/skills}}
+						</ul>
+					</div>
 				</div>
-
-				<div class="about">
-					<span class="position">Front-End Developer </span>
-					<span class="desc"> {{career}} </span>
-				</div>
-			</div>
-			<div class="details">
-				<div class="section">
-					<div class="section__title">Experience</div>
-					<div class="section__list">
+				<!-- Expériences -->
+				<div class="grid_16 experiences">
+					<h3>Experience</h3>
+					<ul>
 						{{#experiences}}
-						<div class="section__list-item">
-							<div class="left">
-								<div class="name">{{company}}</div>
-								<div class="duration">{{startDate}} - {{endDate}}</div>
-							</div>
-							<div class="right">
-								<div class="name">{{role}}</div>
-								<div class="desc">{{description}}</div>
-							</div>
-						</div>
+						<li>
+							<h4><strong>{{role}}</strong> {{company}}</h4>
+							<span class="dates">{{startDate}} - {{endDate}}</span>
+							<p>{{description}}</p>
+						</li>
 						{{/experiences}}
-					</div>
+					</ul>
 				</div>
-				<div class="section">
-					<div class="section__title">Education</div>
-					<div class="section__list">
+				<!-- Formations -->
+				<div class="grid_16 formations">
+					<h3>Education</h3>
+					<ul>
 						{{#educations}}
-						<div class="section__list-item">
-							<div class="left">
-								<div class="name">{{qualification}}</div>
-								<div class="duration">{{year}}</div>
-							</div>
-						</div>
+						<li>
+							<h4><strong>{{qualification}}</strong></h4>
+							<span class="dates"> {{year}}</span>
+						</li>
 						{{/educations}}
-					</div>
+					</ul>
 				</div>
-				<div class="section">
-					<div class="section__title">Skills</div>
-					<div class="skills">
-						{{#skills}}
-						<div class="skills__item">
-							<div class="left"><div class="name">{{technology}}</div></div>
-							<div class="right">
-								<input id="ck1" type="checkbox" checked />
-
-								<label for="ck1"></label>
-								<input id="ck2" type="checkbox" checked />
-
-								<label for="ck2"></label>
-								<input id="ck3" type="checkbox" />
-
-								<label for="ck3"></label>
-								<input id="ck4" type="checkbox" />
-								<label for="ck4"></label>
-								<input id="ck5" type="checkbox" />
-								<label for="ck5"></label>
-							</div>
-						</div>
-						{{/skills}}
-					</div>
+				<!-- <div class="grid_8 loisirs">
+					<h3>Hobbies</h3>
+					<p>Gaming</p>
+					<p>Blogging</p>
+					<p>Swimming</p>
 				</div>
-			</div>
+				<div class="grid_8 contact">
+					<h3>Contact</h3>
+					<ul>
+						<li class="phone">{{phone}}</li>
+						<li class="mail">{{email}}</li>
+					</ul>
+				</div> -->
+			</section>
 		</div>
 	</body>
 </html>
