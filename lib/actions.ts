@@ -10,6 +10,7 @@ export const updateUser = async (resumeProfile: any) => {
 	if (!session) {
 		return redirect("/login");
 	}
+	console.log(resumeProfile, "resume profile from user action");
 	try {
 		const updatedUser = await prisma.user.update({
 			where: {

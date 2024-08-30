@@ -5,6 +5,9 @@ const nextConfig = {
 			{
 				hostname: "avatars.githubusercontent.com",
 			},
+			{
+				hostname: "zvrfgeivsvehskwmrkmz.supabase.co",
+			},
 		],
 	},
 };

@@ -27,14 +27,15 @@ const Experience = () => {
 		control,
 	});
 	const handleFormSubmit = async (data: FormValues) => {
-		context?.handleFormData(data);
+		console.log(data, "data from expreince");
+		// context?.handleFormData(data);
 		try {
 			setLoading(true);
-			const res = await updateUser(context?.formData);
+			const res = await updateUser(data);
 			if (res?.status === "success") {
 				toast.success(res.message);
 			} else {
-				toast.error(res.message);
+				toast.error(res?.message!);
 			}
 		} catch (error) {
 		} finally {

@@ -7,6 +7,7 @@ interface Props {
 }
 
 const Resume = ({ template, userProfile }: Props) => {
+	console.log(userProfile);
 	if (!userProfile) {
 		return (
 			<div className="h-screen justify-center items-center">
@@ -15,7 +16,9 @@ const Resume = ({ template, userProfile }: Props) => {
 		);
 	}
 	const html = Mustache.render(template.html, userProfile);
-	return <div dangerouslySetInnerHTML={{ __html: html }}></div>;
+	return (
+		<div dangerouslySetInnerHTML={{ __html: html }} className="my-10"></div>
+	);
 };
 
 export default Resume;
