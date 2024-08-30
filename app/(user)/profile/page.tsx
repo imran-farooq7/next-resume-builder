@@ -3,6 +3,7 @@ import Basic from "@/components/Basic";
 import Education from "@/components/Education";
 import Experience from "@/components/Experience";
 import Skills from "@/components/Skills";
+import SubscribeUser from "@/components/Subscribe-user";
 import { useFormState } from "@/Context/FormContext";
 
 const ProfilePage = () => {
@@ -23,6 +24,7 @@ const ProfilePage = () => {
 	}
 	return (
 		<div className="mt-10">
+			<SubscribeUser />
 			<div className="flex gap-20 mt-8">
 				<p
 					className={`font-bold text-2xl  ${

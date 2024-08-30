@@ -20,6 +20,7 @@ model User {
   updatedAt     DateTime  @updatedAt
   resumeProfile Json      @default("{}")
   role          String?
+  subscription  Json?     @default("{}")
 }
 
 model Template {
