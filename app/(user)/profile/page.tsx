@@ -5,6 +5,8 @@ import Experience from "@/components/Experience";
 import Skills from "@/components/Skills";
 import SubscribeUser from "@/components/Subscribe-user";
 import { useFormState } from "@/Context/FormContext";
+import { Suspense } from "react";
+import Loading from "../loading";
 
 const ProfilePage = () => {
 	let content = null;
@@ -25,6 +27,7 @@ const ProfilePage = () => {
 	return (
 		<div className="mt-10">
 			<SubscribeUser />
+
 			<div className="flex gap-20 mt-8">
 				<p
 					className={`font-bold text-2xl  ${

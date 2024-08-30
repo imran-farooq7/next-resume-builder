@@ -1,16 +1,15 @@
 "use server";
 import { auth } from "@/auth";
 import { prisma } from "@/prisma/prisma";
-import { Template } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import stripe from "stripe";
 
 export const updateUser = async (resumeProfile: any) => {
 	const session = await auth();
 	if (!session) {
 		return redirect("/login");
 	}
-	console.log(resumeProfile, "resume profile from user action");
 	try {
 		const updatedUser = await prisma.user.update({
 			where: {
@@ -100,4 +99,33 @@ export const getTemplateById = async (id: string) => {
 			message: "something went wrong",
 		};
 	}
+};
+export const createPaymentIntent = async () => {
+	const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
+	try {
+		const paymentIntent: stripe.PaymentIntent =
+			await stripe.paymentIntents.create({
+				amount: 500,
+				currency: "usd",
+			});
+		return {
+			status: "success",
+			data: paymentIntent.client_secret,
+		};
+	} catch (error: any) {
+		return {
+			status: "fail",
+			message: error.message,
+		};
+	}
+};
+export const getUniqueUser = async () => {
+	const session = await auth();
+	const user = await prisma.user.findUnique({
+		where: {
+			email: session?.user?.email!,
+		},
+	});
+	return user;
 };

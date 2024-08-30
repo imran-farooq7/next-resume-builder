@@ -19,7 +19,6 @@ function classNames(...classes: string[]) {
 }
 export default function Navbar() {
 	const session = useSession();
-	console.log(session.data?.user?.image);
 	return (
 		<Disclosure as="nav" className="bg-white shadow">
 			{({ open }) => (

@@ -27,6 +27,7 @@
     "react-hook-form": "^7.52.2",
     "react-hot-toast": "^2.4.1",
     "react-to-print": "^2.15.1",
+    "stripe": "^16.9.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7"
   },
