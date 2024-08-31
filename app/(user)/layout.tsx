@@ -1,4 +1,3 @@
-"use client";
 import Container from "@/components/Container";
 import Navbar from "@/components/Navbar";
 import FormProvider from "@/Context/FormContext";
