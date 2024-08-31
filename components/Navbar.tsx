@@ -10,6 +10,7 @@ import {
 	Transition,
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { User } from "next-auth";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,8 +18,7 @@ import Link from "next/link";
 function classNames(...classes: string[]) {
 	return classes.filter(Boolean).join(" ");
 }
-export default function Navbar() {
-	const session = useSession();
+export default function Navbar({ user }: { user: User }) {
 	return (
 		<Disclosure as="nav" className="bg-white shadow">
 			{({ open }) => (
@@ -37,7 +37,7 @@ export default function Navbar() {
 							</div>
 							{
 								//@ts-ignore
-								session?.data?.user?.role === "admin" && (
+								user?.role === "admin" && (
 									<Menu as="div" className="relative flex items-center ml-3">
 										<div className="flex items-center gap-4 justify-center">
 											<p className="text-sm text-emerald-400 font-bold">
@@ -48,7 +48,7 @@ export default function Navbar() {
 												<span className="sr-only">Open user menu</span>
 												<Image
 													className="rounded-full"
-													src={session.data.user.image!}
+													src={user?.image!}
 													alt="avatar"
 													width={40}
 													height={40}
@@ -112,7 +112,7 @@ export default function Navbar() {
 
 							{
 								//@ts-ignore
-								session?.data?.user?.role === "user" && (
+								user?.role === "user" && (
 									<div className="hidden sm:ml-6 sm:flex sm:items-center">
 										{/* Profile dropdown */}
 										<Menu as="div" className="relative ml-3">
