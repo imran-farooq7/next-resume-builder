@@ -4,10 +4,18 @@ import { createPaymentIntent, getUniqueUser } from "@/lib/actions";
 import { User } from "@prisma/client";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js";
+import CheckoutForm from "./CheckoutForm";
+const stripePromise = loadStripe(
+	process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
+);
 
 const SubscribeUser = () => {
 	const [clientSecret, setClientSecret] = useState("");
 	const [loading, setLoading] = useState(false);
+	const [open, setOpen] = useState(false);
+
 	const [user, setUser] = useState<User>();
 	useEffect(() => {
 		const getUser = async () => {
@@ -24,7 +32,7 @@ const SubscribeUser = () => {
 			const res = await createPaymentIntent();
 			if (res.status === "success") {
 				setClientSecret(res.data!);
-				console.log(res.data);
+				setOpen(true);
 			} else {
 				toast.error("Something went wrong");
 			}
@@ -33,6 +41,9 @@ const SubscribeUser = () => {
 		} finally {
 			setLoading(false);
 		}
+	};
+	const options: StripeElementsOptions = {
+		clientSecret: clientSecret,
 	};
 
 	if (user && user?.subscription === undefined) {
@@ -49,6 +60,11 @@ const SubscribeUser = () => {
 			>
 				Subscribe Now <span className="font-bold">5$</span>
 			</button>
+			{clientSecret && (
+				<Elements stripe={stripePromise} options={options}>
+					<CheckoutForm open={open} setOpen={setOpen} />
+				</Elements>
+			)}
 		</div>
 	);
 };
