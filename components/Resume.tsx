@@ -7,7 +7,6 @@ interface Props {
 }
 
 const Resume = ({ template, userProfile }: Props) => {
-	console.log(userProfile);
 	if (!userProfile) {
 		return (
 			<div className="h-screen justify-center items-center">
