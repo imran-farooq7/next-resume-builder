@@ -1,5 +1,4 @@
 "use client";
-import Loading from "@/app/(user)/loading";
 import { createPaymentIntent, getUniqueUser } from "@/lib/actions";
 import { User } from "@prisma/client";
 import { useEffect, useState } from "react";
@@ -25,7 +24,7 @@ const SubscribeUser = () => {
 			setLoading(false);
 		};
 		getUser();
-	}, []);
+	}, [open]);
 	const getClientSecret = async () => {
 		try {
 			setLoading(true);
@@ -46,7 +45,7 @@ const SubscribeUser = () => {
 		clientSecret: clientSecret,
 	};
 
-	if (user && user?.subscription === undefined) {
+	if (user?.subscription) {
 		return <h1 className="text-emerald-500 font-bold">You are a subscriber</h1>;
 	}
 
@@ -62,7 +61,7 @@ const SubscribeUser = () => {
 			</button>
 			{clientSecret && (
 				<Elements stripe={stripePromise} options={options}>
-					<CheckoutForm open={open} setOpen={setOpen} />
+					<CheckoutForm open={open} setOpen={setOpen} user={user!} />
 				</Elements>
 			)}
 		</div>

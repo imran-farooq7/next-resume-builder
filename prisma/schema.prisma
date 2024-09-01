@@ -32,6 +32,13 @@ model Template {
   createdAt DateTime @default(now())
 }
 
+model Subscription {
+  id        String @id @default(cuid())
+  paymentId String
+  userId    String
+  amount    Int
+}
+
 model Account {
   userId            String
   type              String

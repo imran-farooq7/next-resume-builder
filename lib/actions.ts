@@ -129,3 +129,42 @@ export const getUniqueUser = async () => {
 	});
 	return user;
 };
+export const saveSubscription = async ({
+	userId,
+	paymentId,
+	amount,
+}: {
+	userId: string;
+	paymentId: string;
+	amount: number;
+}) => {
+	try {
+		const subscription = await prisma.subscription.create({
+			data: {
+				userId,
+				amount,
+				paymentId,
+			},
+		});
+		const updateUser = await prisma.user.update({
+			where: {
+				id: userId,
+			},
+			data: {
+				subscription,
+			},
+		});
+		if (subscription && updateUser) {
+			revalidatePath("/profile");
+			return {
+				status: "success",
+				message: "Subscription saved successfully",
+			};
+		}
+	} catch (error) {
+		return {
+			status: "error",
+			message: "Error saving subscription",
+		};
+	}
+};

@@ -1,3 +1,4 @@
+import { saveSubscription } from "@/lib/actions";
 import {
 	Dialog,
 	DialogPanel,
@@ -5,19 +6,23 @@ import {
 	Transition,
 	TransitionChild,
 } from "@headlessui/react";
+import { User } from "@prisma/client";
 import {
 	PaymentElement,
 	useElements,
 	useStripe,
 } from "@stripe/react-stripe-js";
+import { useRouter } from "next/navigation";
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import toast from "react-hot-toast";
 interface Props {
 	open: boolean;
 	setOpen: Dispatch<SetStateAction<boolean>>;
+	user: User;
 }
 
-export default function CheckoutForm({ open, setOpen }: Props) {
+export default function CheckoutForm({ open, setOpen, user }: Props) {
+	const router = useRouter();
 	const stripe = useStripe();
 	const elements = useElements();
 	const [isLoading, setIsLoading] = useState(false);
@@ -40,13 +45,20 @@ export default function CheckoutForm({ open, setOpen }: Props) {
 		});
 
 		if (result.error) {
-			// Show error to your customer (for example, payment details incomplete)
 			toast.error(result.error.message!);
 			setIsLoading(false);
 		} else {
+			toast.success("Payment Successfull");
 			setIsLoading(false);
 			setOpen(false);
-			toast.success("Payment Successfull");
+			const response = await saveSubscription({
+				userId: user.id,
+				paymentId: result.paymentIntent.id,
+				amount: 5,
+			});
+			if (response?.status === "success") {
+				toast.success("Subscription activated Successfully");
+			}
 		}
 	};
 	return (
