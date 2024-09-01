@@ -3,7 +3,6 @@ import Resume from "@/components/Resume";
 import { getTemplateById } from "@/lib/actions";
 import { prisma } from "@/prisma/prisma";
 import { Template } from "@prisma/client";
-import Link from "next/link";
 
 interface Props {
 	params: {
