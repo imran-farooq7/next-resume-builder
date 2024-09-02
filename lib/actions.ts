@@ -168,3 +168,18 @@ export const saveSubscription = async ({
 		};
 	}
 };
+export const getAllSubscriptions = async () => {
+	try {
+		const subscriptions = await prisma.subscription.findMany({
+			orderBy: {
+				id: "asc",
+			},
+		});
+		return subscriptions;
+	} catch (error) {
+		return {
+			status: "error",
+			message: "Error getting subscriptions",
+		};
+	}
+};
