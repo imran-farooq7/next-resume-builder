@@ -183,3 +183,14 @@ export const getAllSubscriptions = async () => {
 		};
 	}
 };
+export const getAllUsers = async () => {
+	try {
+		const users = await prisma.user.findMany();
+		return users;
+	} catch (error) {
+		return {
+			status: "error",
+			message: "Error getting users",
+		};
+	}
+};
