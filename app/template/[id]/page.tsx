@@ -21,10 +21,16 @@ const TemplatePreview = async ({ params: { id } }: Props) => {
 			resumeProfile: true,
 		},
 	});
+	const user = await prisma.user.findUnique({
+		where: {
+			email: session?.user?.email!,
+		},
+	});
 	return (
 		<Resume
 			template={template as Template}
 			userProfile={userProfile?.resumeProfile!}
+			user={user!}
 		/>
 	);
 };
