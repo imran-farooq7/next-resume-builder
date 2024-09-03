@@ -14,7 +14,6 @@
 			.container_16 {
 				margin: 0 auto;
 				background: #f5f5f5;
-				height: 100%;
 			}
 			.resume-container {
 				width: 800px;
@@ -239,11 +238,7 @@
 			}
 			.skype {
 				background-position: 0 -180px;
-			}
-			/* .resume-body {
-				display: flex;
-				justify-content: center;
-			} */
+			} /* .resume-body { 				display: flex; 				justify-content: center; 			} */
 		</style>
 	</head>
 	<body class="resume-body">
@@ -258,10 +253,7 @@
 						<h2>Phone: {{phone}}</h2>
 					</hgroup>
 					<figure>
-						<img
-							alt="Sheldon COOPER"
-							src="https://avatars.githubusercontent.com/u/70173754?v=4"
-						/>
+						<img alt="Sheldon COOPER" src="{{profileImgUrl}}" />
 					</figure>
 				</div>
 			</header>
@@ -309,19 +301,7 @@
 						{{/educations}}
 					</ul>
 				</div>
-				<!-- <div class="grid_8 loisirs">
-					<h3>Hobbies</h3>
-					<p>Gaming</p>
-					<p>Blogging</p>
-					<p>Swimming</p>
-				</div>
-				<div class="grid_8 contact">
-					<h3>Contact</h3>
-					<ul>
-						<li class="phone">{{phone}}</li>
-						<li class="mail">{{email}}</li>
-					</ul>
-				</div> -->
+				<!-- <div class="grid_8 loisirs"> 					<h3>Hobbies</h3> 					<p>Gaming</p> 					<p>Blogging</p> 					<p>Swimming</p> 				</div> 				<div class="grid_8 contact"> 					<h3>Contact</h3> 					<ul> 						<li class="phone">{{phone}}</li> 						<li class="mail">{{email}}</li> 					</ul> 				</div> -->
 			</section>
 		</div>
 	</body>

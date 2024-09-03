@@ -1,11 +1,13 @@
 import { useFormState } from "@/Context/FormContext";
 import { useForm } from "react-hook-form";
 import Input from "./Input";
+import { uploadThumbnail } from "@/supabase/client";
 interface FormValues {
 	name: string;
 	email: string;
 	phone: string;
 	career: string;
+	profileImgUrl: any;
 }
 
 const Basic = () => {
@@ -13,8 +15,14 @@ const Basic = () => {
 	const { register, handleSubmit, control } = useForm<FormValues>({
 		defaultValues: context?.formData,
 	});
-	const handleFormSubmit = (data: FormValues) => {
-		context?.handleFormData(data);
+	const handleFormSubmit = async (data: FormValues) => {
+		const url = await uploadThumbnail(data.profileImgUrl[0]);
+		const updateData = {
+			...data,
+			profileImgUrl: url,
+		};
+
+		context?.handleFormData(updateData);
 		context?.handleNextStep();
 	};
 
@@ -50,10 +58,38 @@ const Basic = () => {
 						{...register("career")}
 					/>
 				</div>
-				<button className="bg-emerald-400 text-white py-3 px-10 rounded-lg mt-4 hover:scale-105 transition-all ease-in-out">
-					Next
-				</button>
 			</div>
+			<div className="rounded-md border col-span-2 border-emerald-400 bg-emerald-50 p-4 shadow-md w-52">
+				<label
+					htmlFor="upload"
+					className="flex flex-col items-center gap-2 cursor-pointer"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						className="h-10 w-10 fill-white stroke-emerald-400"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						stroke-width="2"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+						/>
+					</svg>
+					<span className="text-gray-600 font-medium">Upload Image</span>
+				</label>
+				<Input
+					label=""
+					id="upload"
+					type="file"
+					className="hidden"
+					{...register("profileImgUrl")}
+				/>
+			</div>
+			<button className="bg-emerald-400 w-1/3 text-white py-3 px-10 rounded-lg mt-4 hover:scale-105 transition-all ease-in-out">
+				Next
+			</button>
 		</form>
 	);
 };
